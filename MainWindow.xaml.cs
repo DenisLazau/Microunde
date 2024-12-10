@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-namespace Microunde
+namespace PAOO_Microunde
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

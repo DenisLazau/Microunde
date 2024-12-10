@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using PAOO.Microunde;
+
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,51 +17,87 @@ namespace PAOO_Microunde
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IAfisaj_microunde
     {
-        public int ticker = 0;
+        public Microunde microunde;
         public MainWindow()
         {
-            Microunde microunde = new Microunde();
+            microunde = new Microunde(this);
             InitializeComponent();
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
-            StareUsa.Text = "Usa Inchisa";
-            StareMicrounde.Text = "Oprit";
-            ticker = 0;
-            Ticker.Text = ticker.ToString();
         }
 
         private void InchideUsa(object sender, RoutedEventArgs e)
         {
-            StareUsa.Text = "Usa Inchisa";
+            microunde.InchideUsa();
         }
 
         private void DeschideUsa(object sender, RoutedEventArgs e)
         {
-            StareUsa.Text = "Usa Deschisa";
-            StareMicrounde.Text = "Oprit";
-            Ticker.Text = ticker.ToString();
+            microunde.DeschideUsa();
         }
 
         private void Pornit(object sender, RoutedEventArgs e)
         {
-            if(StareUsa.Text == "Usa Inchisa")
-            {
-                StareMicrounde.Text = "Pornit";
-                ticker = 30;
-            }
+            microunde.Pornit();
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            if(ticker > 0)
-            {
-                ticker--;
-                Ticker.Text = ticker.ToString();
-            }
+            Ticks();
+        }
+
+        public void Deschide_usa_Click()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Gateste_ON_Click()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Inchide_usa_Click()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IAfisaj_microunde.MainWindow()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Set_gateste_OFF()
+        {
+            StareMicrounde.Text = "Oprit";
+        }
+
+        public void Set_gateste_ON()
+        {
+            StareMicrounde.Text = "Pornit";
+        }
+
+        public void Set_timp_ramas(int timp)
+        {
+            Ticker.Text = timp.ToString();
+        }
+
+        public void Set_usa_deschisa()
+        {
+            StareUsa.Text = "Usa Deschisa";
+        }
+
+        public void Set_usa_inchisa()
+        {
+            StareUsa.Text = "Usa Inchisa";
+        }
+
+        public void Ticks()
+        {
+            microunde.Ticks();
         }
     }
 }

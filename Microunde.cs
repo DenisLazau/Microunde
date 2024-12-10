@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PAOO.Microunde;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,7 @@ namespace PAOO_Microunde
 {
     public class Microunde
     {
+        //singleton + clasa context
         public Enums.StareUsa StareUsa
         { get; set; }
 
@@ -17,8 +20,12 @@ namespace PAOO_Microunde
         public int Ticker
         { get; set; }
 
-        public Microunde()
+        private MainWindow mainWindow
+        { get; set; }
+
+        public Microunde(MainWindow window)
         {
+            mainWindow = window;
             StareUsa = Enums.StareUsa.Inchisa;
             StareMicrounde = Enums.StareMicrounde.Oprit;
             Ticker = 0;
@@ -27,13 +34,23 @@ namespace PAOO_Microunde
         public void InchideUsa()
         {
             StareUsa = Enums.StareUsa.Inchisa;
+            if (StareMicrounde == Enums.StareMicrounde.Oprit && Ticker > 0)
+            {
+                StareMicrounde = Enums.StareMicrounde.Pornit;
+                mainWindow.Set_gateste_OFF();
+            }
+            mainWindow.Set_usa_deschisa();
         }
 
         public void DeschideUsa()
         {
             StareUsa = Enums.StareUsa.Deschisa;
-            StareMicrounde = Enums.StareMicrounde.Oprit;
-            Ticker = 0;
+            if (StareMicrounde == Enums.StareMicrounde.Pornit)
+            {
+                StareMicrounde = Enums.StareMicrounde.Oprit;
+                mainWindow.Set_gateste_OFF();
+            }
+            mainWindow.Set_usa_deschisa();
         }
 
         public void Pornit()
@@ -41,6 +58,16 @@ namespace PAOO_Microunde
             if (StareUsa == Enums.StareUsa.Inchisa)
             {
                 StareMicrounde = Enums.StareMicrounde.Pornit;
+                mainWindow.Set_gateste_ON();
+            }
+        }
+
+        public void Ticks()
+        {
+            if(Ticker > 0 && StareMicrounde == Enums.StareMicrounde.Pornit)
+            {
+                Ticker--;
+                mainWindow.Set_timp_ramas(Ticker);
             }
         }
     }

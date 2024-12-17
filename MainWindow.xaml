@@ -12,6 +12,6 @@
         <Button Content="Pornit" HorizontalAlignment="Left" Margin="595,315,0,0" VerticalAlignment="Top" Height="48" Width="84" Click="Pornit"/>
         <TextBlock x:Name="StareUsa" HorizontalAlignment="Left" Margin="55,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78" Width="158"/>
         <TextBlock x:Name="StareMicrounde" HorizontalAlignment="Left" Margin="55,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78" Width="158"/>
-        <TextBlock x:Name="Ticker" HorizontalAlignment="Left" Margin="55,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78" Width="158"/>
+        <TextBlock x:Name="Ticker" HorizontalAlignment="Left" Margin="55,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="78" Width="158"/>
     </Grid>
 </Window>

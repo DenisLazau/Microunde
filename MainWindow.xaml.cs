@@ -1,83 +1,84 @@
 ﻿using PAOO.Microunde;
 
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
-
 namespace PAOO_Microunde
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IAfisaj_microunde
+    public partial class MainWindow : IAfisaj_microunde
     {
-        public Microunde microunde;
+        static Context context;
+        static MainWindow instance;
         public MainWindow()
         {
-            microunde = new Microunde(this);
             InitializeComponent();
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += timer_Tick;
-            timer.Start();
-        }
-
-        private void InchideUsa(object sender, RoutedEventArgs e)
-        {
-            microunde.InchideUsa();
-        }
-
-        private void DeschideUsa(object sender, RoutedEventArgs e)
-        {
-            microunde.DeschideUsa();
-        }
-
-        private void Pornit(object sender, RoutedEventArgs e)
-        {
-            microunde.Pornit();
-        }
-
-        void timer_Tick(object sender, EventArgs e)
-        {
+            instance = this;
+            context = Context.Instance();
+            StareUsa.Text = "Usa Inchisa";
             Ticks();
         }
-
-        public void Set_gateste_OFF()
+        public static MainWindow getInstance()
         {
-            StareMicrounde.Text = "Oprit";
+            return instance;
         }
 
-        public void Set_gateste_ON()
+        private void DeschideUsa(object sender, EventArgs e)
         {
-            StareMicrounde.Text = "Pornit";
+            Context.stare_curenta.deschideUsa();
         }
 
-        public void Set_timp_ramas(int timp)
+        private void InchideUsa(object sender, EventArgs e)
         {
-            Ticker.Text = timp.ToString();
+            Context.stare_curenta.inchideUsa();
         }
 
-        public void Set_usa_deschisa()
+        private void Pornit(object sender, EventArgs e)
+        {
+            context.Timp_ramas += 30;
+            setTimpRamas(context.getParsedTime());
+            Context.stare_curenta.porneste();
+        }
+
+        async void Ticks()
+        {
+            while (true)
+            {
+                await (Task.Delay(1000));
+                System.Diagnostics.Debug.WriteLine("A trecut 1 secunda!!!");
+                //prelucrarile care se fac la fiecare secunda:
+                //decrementarea ceasului si actualizarea afisarilor pe interfata
+                Context.stare_curenta.Tick_ceas();
+            }
+        }
+
+        //interface implementation
+        public void setTimpRamas(string afis)
+        {
+            Ticker.Text = afis;
+        }
+
+        public void setUsaDeschisa()
         {
             StareUsa.Text = "Usa Deschisa";
         }
 
-        public void Set_usa_inchisa()
+        public void setUsaInchisa()
         {
             StareUsa.Text = "Usa Inchisa";
         }
 
-        public void Ticks()
+        public void setGatesteOff()
         {
-            microunde.Ticks();
+            StareMicrounde.Text = "Oprit";
+        }
+
+        public void setGatesteOn()
+        {
+            StareMicrounde.Text = "Pornit";
+        }
+        public void errorUsa()
+        {
+            StareMicrounde.Text = "Oprit";
         }
     }
 }

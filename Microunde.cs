@@ -34,12 +34,7 @@ namespace PAOO_Microunde
         public void InchideUsa()
         {
             StareUsa = Enums.StareUsa.Inchisa;
-            if (StareMicrounde == Enums.StareMicrounde.Oprit && Ticker > 0)
-            {
-                StareMicrounde = Enums.StareMicrounde.Pornit;
-                mainWindow.Set_gateste_OFF();
-            }
-            mainWindow.Set_usa_deschisa();
+            mainWindow.Set_usa_inchisa();
         }
 
         public void DeschideUsa()
@@ -59,6 +54,7 @@ namespace PAOO_Microunde
             {
                 StareMicrounde = Enums.StareMicrounde.Pornit;
                 mainWindow.Set_gateste_ON();
+                Ticker = Ticker + 30;
             }
         }
 

@@ -50,26 +50,6 @@ namespace PAOO_Microunde
             Ticks();
         }
 
-        public void Deschide_usa_Click()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Gateste_ON_Click()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Inchide_usa_Click()
-        {
-            throw new NotImplementedException();
-        }
-
-        void IAfisaj_microunde.MainWindow()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Set_gateste_OFF()
         {
             StareMicrounde.Text = "Oprit";

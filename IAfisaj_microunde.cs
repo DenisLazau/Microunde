@@ -8,6 +8,5 @@
 
         void setGatesteOff();
         void setGatesteOn();
-        void errorUsa();
     }
 }

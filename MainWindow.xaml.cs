@@ -17,26 +17,26 @@ namespace PAOO_Microunde
             StareUsa.Text = "Usa Inchisa";
             Ticks();
         }
-        public static MainWindow getInstance()
+        public static MainWindow GetInstance()
         {
             return instance;
         }
 
         private void DeschideUsa(object sender, EventArgs e)
         {
-            Context.stare_curenta.deschideUsa();
+            Context.stare_curenta.DeschideUsa();
         }
 
         private void InchideUsa(object sender, EventArgs e)
         {
-            Context.stare_curenta.inchideUsa();
+            Context.stare_curenta.InchideUsa();
         }
 
         private void Pornit(object sender, EventArgs e)
         {
             context.Timp_ramas += 30;
-            setTimpRamas(context.getParsedTime());
-            Context.stare_curenta.porneste();
+            setTimpRamas(context.Timp_ramas.ToString());
+            Context.stare_curenta.Porneste();
         }
 
         async void Ticks()
@@ -45,13 +45,10 @@ namespace PAOO_Microunde
             {
                 await (Task.Delay(1000));
                 System.Diagnostics.Debug.WriteLine("A trecut 1 secunda!!!");
-                //prelucrarile care se fac la fiecare secunda:
-                //decrementarea ceasului si actualizarea afisarilor pe interfata
                 Context.stare_curenta.Tick_ceas();
             }
         }
 
-        //interface implementation
         public void setTimpRamas(string afis)
         {
             Ticker.Text = afis;
@@ -75,10 +72,6 @@ namespace PAOO_Microunde
         public void setGatesteOn()
         {
             StareMicrounde.Text = "Pornit";
-        }
-        public void errorUsa()
-        {
-            StareMicrounde.Text = "Oprit";
         }
     }
 }

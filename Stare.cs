@@ -12,8 +12,8 @@ namespace PAOO.Microunde
         }
 
         public abstract void Tick_ceas();
-        public abstract void deschideUsa();
-        public abstract void inchideUsa();
-        public abstract void porneste();
+        public abstract void DeschideUsa();
+        public abstract void InchideUsa();
+        public abstract void Porneste();
     }
 }

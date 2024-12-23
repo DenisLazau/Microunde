@@ -12,7 +12,7 @@ namespace PAOO_Microunde
             if (instance == null)
             {
                 instance = new Context();
-                afisare = MainWindow.getInstance();
+                afisare = MainWindow.GetInstance();
                 stare_curenta = Stare_USA_INCHISA.Instance();
             }
             return instance;
@@ -20,25 +20,21 @@ namespace PAOO_Microunde
 
         public int Timp_ramas
         { get => timp_ramas; set => timp_ramas = value; }
-        //singleton
-        private static Context instance = null;
+        private static Context instance;
 
-        public void inchideUsaContext()
+        public void InchideUsa()
         {
             stare_curenta = Stare_USA_INCHISA.Instance();
             afisare.setUsaInchisa();
         }
-        public void deschideUsaContext()
+        public void DeschideUsa()
         {
             stare_curenta = Stare_USA_DESCHISA.Instance();
             afisare.setUsaDeschisa();
-        }
-        public void displayErrorUsa()
-        {
-            afisare.errorUsa();
+            afisare.setGatesteOff();
         }
 
-        public void pornesteContext()
+        public void Porneste()
         {
             stare_curenta = Stare_GATESTE_ON.Instance();
             afisare.setGatesteOn();
@@ -48,7 +44,7 @@ namespace PAOO_Microunde
             if (Timp_ramas > 0)
             {
                 Timp_ramas -= 1;
-                afisare.setTimpRamas(getParsedTime());
+                afisare.setTimpRamas(Timp_ramas.ToString());
             }
             else
             {
@@ -56,25 +52,5 @@ namespace PAOO_Microunde
                 stare_curenta = Stare_USA_INCHISA.Instance();
             }
         }
-        public string getParsedTime()
-        {
-            int min, sec;
-            min = Timp_ramas / 60;
-            sec = Timp_ramas % 60;
-            string af = "";
-            if (min < 10)
-                af = "0" + min + ":";
-            else
-                af = min + ":";
-            if (sec < 10)
-            {
-                af = af + "0" + sec;
-            }
-            else
-                af = af + sec;
-            return af;
-
-        }
-
     }
 }

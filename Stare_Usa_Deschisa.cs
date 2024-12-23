@@ -10,16 +10,15 @@
             return instance;
         }
 
-        public override void deschideUsa() { }
+        public override void DeschideUsa() { }
 
-        public override void inchideUsa()
+        public override void InchideUsa()
         {
-            context.inchideUsaContext();
+            context.InchideUsa();
         }
 
-        public override void porneste()
+        public override void Porneste()
         {
-            context.displayErrorUsa();
         }
 
         public override void Tick_ceas() { }

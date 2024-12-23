@@ -9,14 +9,14 @@
             if (instance == null) instance = new Stare_USA_INCHISA();
             return instance;
         }
-        public override void deschideUsa()
+        public override void DeschideUsa()
         {
-            context.deschideUsaContext();
+            context.DeschideUsa();
         }
-        public override void inchideUsa() { }
-        public override void porneste()
+        public override void InchideUsa() { }
+        public override void Porneste()
         {
-            context.pornesteContext();
+            context.Porneste();
         }
         public override void Tick_ceas() { }
     }

@@ -5,16 +5,18 @@ namespace PAOO_Microunde
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : IAfisaj_microunde
+    public partial class MainWindow : IAfisajMicrounde, IObserver<Stare>
     {
-        static Context context;
+        static Context microunde;
         static MainWindow instance;
+        private IDisposable subscriber;
         public MainWindow()
         {
             InitializeComponent();
             instance = this;
-            context = Context.Instance();
+            microunde = Context.Instance();
             StareUsa.Text = "Usa Inchisa";
+            StareMicrounde.Text = "Oprit";
             Ticks();
         }
         public static MainWindow GetInstance()
@@ -34,8 +36,7 @@ namespace PAOO_Microunde
 
         private void Pornit(object sender, EventArgs e)
         {
-            context.Timp_ramas += 30;
-            setTimpRamas(context.Timp_ramas.ToString());
+            setTimpRamas(microunde.Timp_ramas.ToString());
             Context.stare_curenta.Porneste();
         }
 
@@ -72,6 +73,49 @@ namespace PAOO_Microunde
         public void setGatesteOn()
         {
             StareMicrounde.Text = "Pornit";
+        }
+
+        public virtual void Subscribe(IObservable<Stare> context)
+        {
+           subscriber = context.Subscribe(this);
+        }
+        public virtual void Unsubscribe()
+        {
+            subscriber.Dispose();
+        }
+
+
+        public void OnCompleted()
+        {
+            ((IObserver<Stare>)instance).OnCompleted();
+        }
+
+        public void OnError(Exception error)
+        {
+            ((IObserver<Stare>)instance).OnError(error);
+        }
+
+        public void OnNext(Stare value)
+        {
+            if (value.GetType() == typeof(StareGatesteOn))
+            {
+                setGatesteOn();
+                setTimpRamas(microunde.Timp_ramas.ToString());
+                if (microunde.Timp_ramas == 0)
+                {
+                    setGatesteOff();
+                }
+            }
+            else if (value.GetType() == typeof(StareUsaDeschisa))
+            {
+                setTimpRamas(microunde.Timp_ramas.ToString());
+                setGatesteOff();
+                setUsaDeschisa();
+            }
+            else if (value.GetType() == typeof(StareUsaInchisa))
+            {
+                setUsaInchisa();
+            }
         }
     }
 }

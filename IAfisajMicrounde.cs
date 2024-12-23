@@ -1,11 +1,10 @@
 ﻿namespace PAOO.Microunde
 {
-    public interface IAfisaj_microunde
+    public interface IAfisajMicrounde
     {
         void setTimpRamas(String afis);
         void setUsaDeschisa();
         void setUsaInchisa();
-
         void setGatesteOff();
         void setGatesteOn();
     }

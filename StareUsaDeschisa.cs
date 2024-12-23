@@ -1,12 +1,14 @@
 ﻿namespace PAOO.Microunde
 {
-    class Stare_USA_DESCHISA : Stare
+    class StareUsaDeschisa : Stare
     {
-        //singleton implementation
-        private static Stare_USA_DESCHISA instance = null;
-        public static Stare_USA_DESCHISA Instance()
+        private static StareUsaDeschisa instance;
+        public static StareUsaDeschisa Instance()
         {
-            if (instance == null) instance = new Stare_USA_DESCHISA();
+            if (instance == null)
+            {
+                instance = new StareUsaDeschisa();
+            }
             return instance;
         }
 

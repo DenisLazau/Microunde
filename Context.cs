@@ -25,21 +25,21 @@ namespace PAOO_Microunde
         public void InchideUsa()
         {
             stare_curenta = StareUsaInchisa.Instance();
-            afisare.setUsaInchisa();
+            //afisare.setUsaInchisa();
             Notify();
         }
         public void DeschideUsa()
         {
             stare_curenta = StareUsaDeschisa.Instance();
-            afisare.setUsaDeschisa();
-            afisare.setGatesteOff();
+            //afisare.setUsaDeschisa();
+            //afisare.setGatesteOff();
             Notify();
         }
 
         public void Porneste()
         {
             stare_curenta = StareGatesteOn.Instance();
-            afisare.setGatesteOn();
+            //afisare.setGatesteOn();
             Notify();
         }
         public void tickCeasContext()
@@ -47,12 +47,12 @@ namespace PAOO_Microunde
             if (Timp_ramas > 0)
             {
                 Timp_ramas -= 1;
-                afisare.setTimpRamas(Timp_ramas.ToString());
+                //afisare.setTimpRamas(Timp_ramas.ToString());
                 Notify();
             }
             else
             {
-                afisare.setGatesteOff();
+                //afisare.setGatesteOff();
                 stare_curenta = StareUsaInchisa.Instance();
                 Notify();
             }

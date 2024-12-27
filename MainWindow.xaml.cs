@@ -2,9 +2,6 @@
 
 namespace PAOO_Microunde
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : IAfisajMicrounde, IObserver<Stare>
     {
         static Context microunde;
@@ -15,6 +12,7 @@ namespace PAOO_Microunde
             InitializeComponent();
             instance = this;
             microunde = Context.Instance();
+            Subscribe(microunde);
             StareUsa.Text = "Usa Inchisa";
             StareMicrounde.Text = "Oprit";
             Ticks();
@@ -36,7 +34,6 @@ namespace PAOO_Microunde
 
         private void Pornit(object sender, EventArgs e)
         {
-            setTimpRamas(microunde.Timp_ramas.ToString());
             Context.stare_curenta.Porneste();
         }
 
